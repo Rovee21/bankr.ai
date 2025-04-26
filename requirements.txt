@@ -1,0 +1,5 @@
+torch==2.5.1
+Byaldi==0.0.7
+transformers==4.51.3
+mysql-connector-python==9.1.0
+colpali-engine>=0.3.0

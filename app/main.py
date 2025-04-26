@@ -14,6 +14,12 @@ from io import BytesIO
 import base64
 from PIL import Image
 import mysql.connector
+from dotenv import load_dotenv
+import os
+
+# Change path to the correct location
+# load_dotenv(dotenv_path="/Users/yahiasalman/Desktop/personal_projects/dragonhacksbackend/app/.env")
+load_dotenv()
 
 db = mysql.connector.connect(
     host="localhost",
@@ -25,19 +31,18 @@ db = mysql.connector.connect(
 
 cursor = db.cursor()
 
-ELEVEN_LABS_KEY = "sk_cbed95c7df787f3f64b9e1f1e3a77e8182e2dda7d5f021b2"
-GEMINI_API_KEY = "AIzaSyB8vYIeQ0zcvx-r8_uLc3xgmUITduHBYoU"
-PERPLEXITY_API_KEY = "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"
 
-eleven_labs_client = ElevenLabs(api_key=ELEVEN_LABS_KEY)
-gemini_client = genai.Client(api_key=GEMINI_API_KEY)
 
+eleven_labs_client = ElevenLabs(api_key=os.getenv("ELEVEN_LABS_KEY"))
+gemini_client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+PERPLEXITY_API_KEY = os.getenv("PERPLEXITY_API_KEY")
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["localhost:3000", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -80,7 +85,7 @@ def search_documents(query: QueryRequest):
     
     images.append(final_query)
     response = gemini_client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-2.5-pro-exp-03-25",
         contents=images
     )
     return {"answer": response.text}
@@ -175,6 +180,7 @@ def change_personal_info(info: PersonalInfo):
 
 @app.get("/get_personal_info")
 def get_personal_info():
+    
     cursor = db.cursor(dictionary=True)
     
     try:
