@@ -4,7 +4,7 @@ import { FinancialInfo } from '../components/FinancialInfo';
 
 export default function FinancialPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-primary-dark to-primary">
       <Head>
         <title>Financial Information - Bankr.ai</title>
         <meta name="description" content="Your personal banking assistant" />
@@ -13,16 +13,22 @@ export default function FinancialPage() {
 
       <Navigation />
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <FinancialInfo
-              data={{
-                yearlySalary: '',
-                creditScore: '',
-              }}
-              onChange={() => {}}
-            />
+          <div className="relative">
+            {/* Glowing effect behind the card */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-accent-light/20 opacity-30 blur-xl rounded-2xl"></div>
+            
+            {/* Main card */}
+            <div className="relative bg-primary-light rounded-2xl shadow-xl border border-accent/20 p-8">
+              <FinancialInfo
+                data={{
+                  yearlySalary: '',
+                  creditScore: '',
+                }}
+                onChange={() => {}}
+              />
+            </div>
           </div>
         </div>
       </main>

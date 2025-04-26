@@ -6,6 +6,16 @@ module.exports = {
     theme: {
       extend: {
         colors: {
+          primary: {
+            DEFAULT: '#031e38',
+            light: '#0a2e52',
+            dark: '#020f1c',
+          },
+          accent: {
+            DEFAULT: '#e5c156',
+            light: '#f0d480',
+            dark: '#c9a53d',
+          },
           blue: {
             50: '#f0f9ff',
             100: '#e0f2fe',
@@ -24,6 +34,10 @@ module.exports = {
             700: '#374151',
             800: '#1f2937',
           },
+        },
+        boxShadow: {
+          'neu-up': '8px 8px 16px #020f1c, -8px -8px 16px #042d55',
+          'neu-down': 'inset 8px 8px 16px #020f1c, inset -8px -8px 16px #042d55',
         },
       },
     },
