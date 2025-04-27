@@ -1,1 +1,1 @@
-# MyMoneyBuddy
+# bankr.ai
